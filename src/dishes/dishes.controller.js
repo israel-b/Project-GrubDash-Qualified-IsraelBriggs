@@ -33,7 +33,7 @@ function priceIsValid(req, res, next){
     next();
 }
 
-function ValidateDishId(req, res, next){
+function validateDishId(req, res, next){
     const { dishId } = req.params;
     const foundDish = dishes.find((dish) => dish.id === dishId);
     if (foundDish){
@@ -46,7 +46,7 @@ function ValidateDishId(req, res, next){
     });
 };
 
-function ValidateDishIdUpdate(req, res, next){
+function validateDishIdUpdate(req, res, next){
     const { dishId } = req.params;
     const { data: { id } = {}} = req.body;
     if(req.body.data.id){
@@ -105,15 +105,15 @@ module.exports = {
         priceIsValid,
         create
     ],
-    read: [ValidateDishId, read],
+    read: [validateDishId, read],
     update: [
-        ValidateDishId, 
+        validateDishId, 
         bodyDataHas("name"),
         bodyDataHas("description"),
         bodyDataHas("price"),
         bodyDataHas("image_url"),
         priceIsValid,
-        ValidateDishIdUpdate,
+        validateDishIdUpdate,
         update
     ],
         list,
